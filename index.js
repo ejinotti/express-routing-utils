@@ -24,8 +24,8 @@ function mountSubRoutes(prefix, router, currentDir) {
 function getMounter(currentDir) {
   return function (mountingCb) {
     return function (prefix, router) {
-      mountingCb(prefix, router);
       mountSubRoutes(prefix, router, currentDir);
+      mountingCb(prefix, router);
     };
   };
 }
