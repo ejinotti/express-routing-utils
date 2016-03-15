@@ -15,7 +15,7 @@ function getSubFolders(dir) {
   }, []);
 }
 
-function mountSubRoutes(router, prefix, currentDir) {
+function mountSubRoutes(prefix, router, currentDir) {
   getSubFolders(currentDir).forEach(function (folder) {
     require(path.join(currentDir, folder))(prefix + '/' + folder, router);
   });
@@ -25,7 +25,7 @@ function getMounter(currentDir) {
   return function (mountingCb) {
     return function (prefix, router) {
       mountingCb(prefix, router);
-      mountSubRoutes(router, prefix, currentDir);
+      mountSubRoutes(prefix, router, currentDir);
     };
   };
 }
