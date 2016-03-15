@@ -47,7 +47,13 @@ function collectRoutes(stack, routes) {
   return routes;
 }
 
-function getRoutes(app) {
-  return collectRoutes(app._router.stack, []);
+function getRoutes(appOrRouter) {
+  if (appOrRouter.stack) {
+    return collectRoutes(appOrRouter.stack, []);
+  } else if (appOrRouter._router && appOrRouter._router.stack) {
+    return collectRoutes(appOrRouter._router.stack);
+  } else {
+    return ['Cannot collect routes.'];
+  }
 }
 exports.getRoutes = getRoutes;
